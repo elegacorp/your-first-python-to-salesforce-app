@@ -1,3 +1,5 @@
+from simple_salesforce import Salesforce
+
 # A general connection object variable can be initialized, 
 # which will then be populated with the Salesforce connection
 # object as it is returned from simple_salesforce.
@@ -33,7 +35,7 @@ if production_connection is None:
 # The CreatedDate and Id are returned from the Salesforce database
 # upon record insert, so do not assign those an values.
 account = {"Name":"Test Account 1"}
-account_insert_result = production_connection.Account.insert(account)
+account_insert_result = production_connection.Account.create(account)
 print("account_insert_result: {}".format(account_insert_result))
 
 
