@@ -24,3 +24,21 @@ if production_connection is None:
 		security_token="<security_token>",
 		version=50.0, # the API version of Salesforce, for its metadata
 		domain='login') # login means: a production org
+
+# Records can be defined through Python dictionary objects,
+# with field values specified as key-value pairs. The field name
+# points to its value. In this case, the Name field on the Account
+# can be any string value.
+
+# The CreatedDate and Id are returned from the Salesforce database
+# upon record insert, so do not assign those an values.
+account = {"Name":"Test Account 1"}
+account_insert_result = production_connection.Account.insert(account)
+print("account_insert_result: {}".format(account_insert_result))
+
+
+# With the record insert done, the record can be queried Using
+# SOQL, using this query as an example.
+account_soql = "SELECT Id, Name, CreatedDate FROM Account"
+account_query_results = production_connection.query(account_soql).get('records')
+print("account_query_results: {}".format(len(account_query_results)))
